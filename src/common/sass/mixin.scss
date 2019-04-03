@@ -1,0 +1,25 @@
+
+@charset "utf-8";
+@import "./variable";/*引入配置*/
+@mixin font_color($color){/*通过该函数设置字体颜色，后期方便统一管理；*/
+	color:$color;
+  [data-theme="theme1"] & {
+    color:$font-color-theme1;
+  }
+}
+@mixin bg_color($color){/*通过该函数设置主题颜色，后期方便统一管理；*/
+  background-color:$color;
+  [data-theme="theme1"] & {
+    background-color:$background-color-theme1;
+  }
+
+}
+
+@mixin font-dpr($font-size){/*通过该函数设置字体大小，后期方便统一管理；*/
+	font-size: $font-size;
+	
+}
+@mixin btn_yellow(){
+  background: linear-gradient(to right,#FFD400,#FFB300)
+}
+

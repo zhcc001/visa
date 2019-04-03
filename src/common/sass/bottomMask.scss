@@ -1,0 +1,64 @@
+@charset "utf-8";
+@import "./mixin.scss";
+@import "./variable.scss";/*引入配置*/
+.bottomMaskShow{
+    bottom:0 !important;
+}
+.bottomMaskBox{
+    position: fixed;
+    bottom:-7rem;
+    transition:bottom 0.5s;
+    width: 100%;
+    @include bg_color($background-color-theme0);
+    border-radius:0.14rem 0.14rem 0px 0px;
+    z-index: 130;
+    padding-bottom: 0.4rem;
+    h3{
+        @include font-dpr($font_little_mid);
+        @include font_color($font-color-theme2);
+        font-weight: bold;
+        text-align: center;
+        padding: 0.4rem 0;
+    }
+    ul{
+        width: 80%;
+        margin: 0 auto;
+        li{
+            display: flex;
+            justify-content: space-between;
+            height: 1rem;
+            .itemTitle{
+                display: flex;
+                .imgBox{
+                    position: relative;
+                    width: 0.48rem;
+                    height: 0.48rem;
+                    img{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        margin: auto;  
+                    }
+                }
+                p{
+                    line-height: 0.48rem;
+                }
+            }
+            p{
+                @include font-dpr($font_little_mid1);
+                @include font_color($font-color-theme2);
+                
+            }
+            p.active{
+                @include font_color($font-color-theme);
+            }
+            img{
+                width: 0.36rem;
+                height: 0.36rem;
+            }
+        }
+        
+    }
+}

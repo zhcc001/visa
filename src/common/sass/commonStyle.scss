@@ -1,0 +1,66 @@
+@charset "utf-8";
+@import "./mixin.scss";
+@import "./variable";/*引入配置*/
+.top{
+    width: 100%;
+    @include bg_color($background-color-theme0);
+    padding: 0.28rem 0;
+    
+}
+.topBox{
+    width: 94%;
+    margin: 0 auto;
+    display: flex;
+}
+.address{
+    display: flex;
+    margin-right: 0.34rem;
+}
+.downIcon{
+    width: 0.1rem;
+    height: 0.06rem;
+    margin-top: 0.34rem;
+    margin-left: 0.1rem;
+}
+.city{
+    font-size: 0.26rem;
+    color: #2C2C2C;
+    line-height: 0.72rem;
+}
+.search{
+    flex-grow: 1;
+    height: 0.72rem;
+    display: flex;
+    background: #F2F2F2;
+    border-radius: 0.36rem;
+}
+.souSuoBox{
+    height: 100%;
+    width: 0.6rem;
+    position: relative;
+}
+.souSuo{
+    width: 0.26rem;
+    height: 0.26rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+}
+.keyWord{
+    height: auto;
+    border:none;
+    outline: none;
+    font-size: 0.3rem;
+    color: rgb(28, 28, 29);
+    background: none;
+}
+.keyWord::placeholder{
+    font-size: 0.3rem;
+    color: #B9B9BC;
+}
+
+    

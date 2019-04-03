@@ -1,0 +1,85 @@
+// @import '../../../common/stylus/variable.styl'
+// @import '../../../common/stylus/mixin.styl'
+.airContactWrapper
+  background-color #F7F7F5
+  min-height 100vh
+  box-sizing border-box
+  .scrollWrapper
+    padding 10px 8px 80px
+    & li
+      margin-bottom 8px
+      border-radius 4px
+      .contactInfo
+        // flex()
+        justify-content space-between
+        height 100%
+        .personName
+          height 100%
+          // flex()
+          flex-direction column
+          align-items flex-start
+          font-size 16px
+          font-weight bold
+          img
+            width 19px
+            margin 0px 13px 0 7px
+          .name
+            color #000
+            // flex()
+            justify-content flex-start
+          .ID
+            margin-left 40px
+            font-size 13px
+            color #8B8B8B
+            margin-top 15px
+        .editInfo
+          height 100%
+          margin-right 11px
+          // flex()
+          img
+            width 14px
+  .round
+    width 56px
+    height 56px
+    border-radius 50%
+    background-image linear-gradient(to right,#FFD20B,#FFB400)
+    box-shadow -1px 4px 16px 0px rgba(255,163,2,0.39)
+    display flex
+    justify-content center
+    align-items center
+    position fixed
+    bottom 100px
+    right 10px
+    z-index 101
+    .iconfont
+      color #fff
+      font-size 28px
+  .bottomBarWrapper
+    position fixed
+    bottom 0
+    left 0
+    background-color #fff
+    width 100%
+    height 60px
+    z-index 101
+    // flex()
+    justify-content space-between
+    box-shadow 0px -10px 10px -10px rgba(188,188,188,.3)
+    padding 0 13px
+    box-sizing border-box
+    .checkPerson
+      font-size 12px
+      color #323232
+      // flex()
+      span
+        color #ff867d
+        font-weight bold 
+    .btn
+      // btn_yellow()
+      color #fff
+      height 40px
+      line-height 40px
+      border-radius 20px
+      padding 0 96px
+      font-size 14px
+      font-weight bold
