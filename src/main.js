@@ -11,6 +11,7 @@ import cookie from './utils/cookie.js'
 import './api/interceptors.js'
 // import './router/globalGuard.js'
 import MintUI from 'mint-ui'
+import './common/js/toast.js'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 // require styles

@@ -1,10 +1,10 @@
 import axios from "axios"
-export function AdvertisingPosition(params) {
-    const url = '/api/site/advert'
-  
-    return axios.get(url, params)
+const siteId=1000
+// const code="B101"
+export function AdvertisingPosition(code) {
+    const url = `/api/site/advert?siteId=${siteId}&code=${code}`
+    return axios.get(url)
       .then(res => {
-        console.log(res);
-        // return Promise.resolve(res.data)
+        return Promise.resolve(res.data)
       })
   }

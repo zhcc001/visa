@@ -4,6 +4,7 @@ import qs from 'qs'
 import Vue from 'vue'
 import Cube from 'cube-ui'
 import { BASE_URL, getToken } from './getToken.js'
+var fly = require('flyio')
 
 Vue.use(Cube)
 const vm = new Vue()
@@ -42,12 +43,25 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   res => {
     toast.hide()
+    if(res.data.Code===401000){
+      console.log(res,123)
+      getToken()
+      .then(function (res) {
+        console.log(res)
+        localStorage.setItem('token', res.data.Result.Value)
+        // resolve(res.data.Result.Value)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
     // 排除一个要处理的url
     if (res.config.method === 'get' && (res.config.url.indexOf('/api/weixin/member') > -1 || res.config.url.indexOf('/api/up/member') > -1)) {
       return res
     }
 
     if (res.data.Success) {
+      
       return res
     } else {
       return Promise.reject(new Error(res.data.Message))
@@ -56,3 +70,5 @@ axios.interceptors.response.use(
   err => {
     return Promise.reject(err)
   })
+
+  

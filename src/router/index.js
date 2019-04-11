@@ -6,7 +6,10 @@ import VisaList from '@/pages/visaList'
 import VisaReserve from '@/pages/visaReserve'
 import AddPassenger from '@/pages/addPassenger'
 import SelectReserve from '@/pages/selectReserve'
-// const _import = require('./_import_' + process.env.NODE_ENV)
+import VisaDetail from '@/pages/visaDetail'
+import ArticleDetails from '@/pages/articleDetails'
+import PaySuccess from '@/pages/paySuccess'
+import CitySelect from '@/pages/citySelect'
 
 Vue.use(Router)
 
@@ -60,6 +63,37 @@ export default new Router({
         title:'选择预订人',
         forceTransitionName: ['fadeInRight', 'fadeOutRight']
       }
-    },
-  ]
+    },{
+      path: '/VisaDetail',
+      name: 'visaDetail',
+      component: VisaDetail,
+      meta:{
+        title:'签证详情',
+        forceTransitionName: ['fadeInRight', 'fadeOutRight']
+      }
+    },{
+      path: '/ArticleDetails',
+      name: 'articleDetails',
+      component: ArticleDetails,
+      meta:{
+        title:'文章详情',
+        forceTransitionName: ['fadeInRight', 'fadeOutRight']
+      }
+    },{
+      path: '/PaySuccess',
+      name: 'paySuccess',
+      component: PaySuccess,
+      meta:{
+        title:'支付成功',
+        forceTransitionName: ['fadeInRight', 'fadeOutRight']
+      }
+    },{
+      path: '/CitySelect',
+      name: 'citySelect',
+      component: CitySelect,
+      meta:{
+        title:'城市选择',
+        forceTransitionName: ['fadeInRight', 'fadeOutRight']
+      }
+    }]
 })

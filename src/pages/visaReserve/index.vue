@@ -175,6 +175,8 @@
 </template>
 
 <script>
+import qs from 'qs'
+import axios from "axios";
 export default {
   name: 'visaReserve',
   data () {
@@ -271,6 +273,12 @@ export default {
        payTypeClick(item,index){
         this.payTypeFlag=index
         this.hideFun()
+        this.$router.push({
+            path: '/paySuccess',
+            // query: {
+            //   style: 1
+            // }
+          })
     },
     // 删除预定人
     delRenMsg(i){
@@ -296,6 +304,7 @@ export default {
 @import "../../common/sass/mixin.scss";
 @import "../../common/sass/variable.scss";/*引入配置*/
 @import "../../common/sass/bottomMask.scss";
+@import "../../common/sass/footer.scss";
 .visaReserve{
     padding-top: 0.18rem;
     padding-bottom: 1.4rem;
@@ -489,63 +498,7 @@ h3{
         }
     }
 }
-// 底部
-footer{
-    padding: 0.2rem 0;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    box-shadow:2px -5px 20px 0px rgba(188,188,188,0.26);
-    @include bg_color($background-color-theme0);
-    z-index: 120;
-    .box{
-        display: flex;
-        justify-content: space-between;
-        .textMsg{
-            display: flex;
-            justify-content: space-between;
-            flex-grow: 1;
-            margin-right: 0.4rem;
-            .rightFoot{
-                display: flex;
-            }
-            b{
-                @include font-dpr($font_little_big0);
-                @include font_color($font-color-theme1); 
-                line-height: 0.6rem;
-            }
-            span{
-                padding-left: 0.1rem;
-            }
-            span,i{
-                @include font-dpr($font_little_small);
-                @include font_color($font-color-theme6); 
-            }
-            i{
-                line-height: 0.8rem;
-                margin-right: 0.1rem;
-            }
-            img{
-                width: 0.18rem;
-                height: 0.1rem;
-                margin-top: 0.38rem;
-            }
-        
-        }
-        button{
-            box-shadow:-1px 4px 20px 0px rgba(255,163,2,0.39);
-            @include font_color($font-color-theme5);
-            @include font-dpr($font_little_mid2);
-            width: 2.3rem;
-            line-height: 0.8rem;
-            text-align: center;
-            border-radius:0.4rem;
-            @include btn_yellow()
-        }
-        
-    }
-}
+
 .detailShow{
     bottom:1rem !important;
 }

@@ -480,7 +480,7 @@ export default {
       this.$router.push('/Search')
     },
     enterReserve(){
-      this.$router.push('/VisaReserve')
+      this.$router.push('/visaDetail')
     },
   },
 }

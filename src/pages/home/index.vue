@@ -4,7 +4,7 @@
     <!-- 顶部定位、省市区、搜索 -->
     <div class="top">
     <div class="topBox">
-      <div class="address">
+      <div class="address" v-on:click="enterCity()">
         <span class="city">上海</span>
         <img class="downIcon" src="./sanjiao1.png" alt="">
       </div>
@@ -20,9 +20,7 @@
     <div class="swipeBox">
        <swiper :options="swiperBannerOption" ref="myBannerSwiper" >
     <!-- slides -->
-    <swiper-slide><img src="./首页.png" alt=""></swiper-slide>
-    <swiper-slide><img src="./首页.png" alt=""></swiper-slide>
-    <swiper-slide><img src="./首页.png" alt=""></swiper-slide>
+    <swiper-slide v-for="(item,index) in bannerList" :key='index'><img :src="item.ImageUrl" alt=""></swiper-slide>
     <!-- Optional controls -->
   </swiper>
     <div class="swiper-pagination"  slot="pagination"></div>
@@ -33,12 +31,12 @@
       <h2>热门目的地</h2>
       <div class="hotCountry">
         <ul>
-          <li>
-            <img class="countryImg" src="./France.png" alt="">
+          <li v-for="(item,index) in hotList" :key="index">
+            <img class="countryImg" :src="item.ImageUrl" alt="">
             <div class="countryBox">
               <span class="line"></span>
-              <p class="countryName">法国</p>
-              <b class="countryPrice">¥120起</b>
+              <p class="countryName">{{item.Title}}</p>
+              <b class="countryPrice">¥{{item.SubTitle}}起</b>
             </div>
           </li>
         </ul>
@@ -50,9 +48,17 @@
       <div class="articleBox">
         <swiper :options="swiperOption" ref="mySwiper" >
     <!-- slides -->
-            <swiper-slide><img src="./bgColor1.png" alt=""></swiper-slide>
-            <swiper-slide><img src="./bgColor1.png" alt=""></swiper-slide>
-            <swiper-slide><img src="./bgColor1.png" alt=""></swiper-slide>
+            <swiper-slide v-for="(item,index) in articList" :key="index">
+              <router-link to='/articleDetails'>
+              <div class="articContent" :class="'artic'+index">
+                <p>{{item.Title}}</p>
+                <span>{{item.SubTitle}}</span>
+                <i class="line"></i>
+              </div>
+              </router-link>
+              </swiper-slide>
+            
+              
     <!-- Optional controls -->
       </swiper>
         
@@ -122,22 +128,28 @@ export default {
   name: 'Home',
   data () {
     return {
+      bannerNum:'B101',
+      hotNum:"H101",
+      articNum:'A101',
+      articList:[],
+      hotList:[],
+      bannerList:[],
       swiperOption: {
-           slidesPerView: 3,
-      centeredSlides: true,
-      spaceBetween: 30,
-      pagination: {
-        el: '.articleBox .swiper-pagination',
-        clickable: true,
-      },
-      
-        },
-        swiperBannerOption:{
-          pagination: {
-          el: '.swipeBox .swiper-pagination',
+         freeMode : true,
+        pagination: {
+            el: '.articleBox .swiper-pagination',
           },
-          loop : true,
-          autoplay:true,
+      
+      },
+      swiperBannerOption:{
+          pagination: {
+            el: '.swipeBox .swiper-pagination',
+            },
+          autoplay: {
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: true,
+          },
       },
       tableTitleFlag:0,
       countryTableList:[
@@ -173,7 +185,9 @@ export default {
 
   },
   created(){
-    AdvertisingPosition()
+    this._banner()
+    this._hot()
+    this._artic()
   },
   mounted(){
     // this.swiper.slideTo(3, 1000, true)
@@ -186,7 +200,61 @@ export default {
     enterSearch(){
       this.$router.push('/Search')
     },
+    // 轮播
+    _banner(){
+      AdvertisingPosition(this.bannerNum)
+        .then(res => {
+          this.bannerList=res.Result
+          console.log(this.bannerList)
+          
+        })
+        .catch(err => {
+          if (!err.message) {
+            return
+          }
+          this.$$toast(err.message)
+        })
+    },
+    // 热门目的地
+    _hot(){
+      AdvertisingPosition(this.hotNum)
+        .then(res => {
+          this.hotList=res.Result
+          console.log(this.hotList)
+          
+        })
+        .catch(err => {
+          if (!err.message) {
+            return
+          }
+          this.$$toast(err.message)
+        })
+    },
+    _artic(){
+      AdvertisingPosition(this.articNum)
+        .then(res => {
+          this.articList=res.Result
+          console.log(this.articList)
+          
+        })
+        .catch(err => {
+          if (!err.message) {
+            return
+          }
+          this.$$toast(err.message)
+        })
+    },
+    enterCity(){
+      this.$router.push({
+            path: '/citySelect',
+            // query: {
+            //   style: 1
+            // }
+          })
+    },
   },
+
+
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -229,13 +297,13 @@ h2{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 .hotCountry ul li{
   width: 2.2rem;
   height: 2.56rem;
   position: relative;
   margin-bottom: 0.22rem;
+  margin-right: 0.12rem;
 }
 .countryImg{
   width: 100%;
@@ -268,14 +336,44 @@ h2{
   @include font-dpr($font_little_small1);
   margin-bottom: 0.24rem;
 }
-.articleBox{
-  margin-left: -2rem;
-  margin-top: -0.2rem;
-  margin-bottom: 0.7rem;
-}
+
 .articleBox img{
   width: 100%;
 
+}
+.artic0{
+  @include artic_bg();
+}
+.artic1{
+  @include artic_bg1();
+}
+.artic2{
+  @include artic_bg2();
+}
+.articleBox{
+  margin-bottom: 0.64rem;
+  .articContent{
+    width: 3.69rem;
+    height: 1.9rem;
+    border-radius: 0.1rem;
+    margin: 0 auto;
+    p{
+      @include font_color($font-color-theme5);
+      @include font-dpr($font_little_mid1);
+      padding-left: 0.3rem;
+      padding-top: 0.42rem;
+    }
+    span{
+      @include font_color($font-color-theme5);
+      @include font-dpr($font_little_small1);
+      padding-left: 0.3rem;
+    }
+    i{
+      width: 0.48rem;
+      margin: 0.3rem;
+    }
+  }
+  
 }
 .processImg{
   width: 100%;
@@ -353,11 +451,11 @@ h2{
 .visaList{
   padding-bottom: 0.6rem;
 }
-a{
+.visaList a{
   width: 80%;
   margin: 0 auto;
   line-height: 0.85rem;
-  border:0.02rem solid $border-Color;
+  border:0.02rem solid $border-Color1;
   @include font_color($font-color-theme4);
   @include font-dpr($font_little_mid2);
   text-align: center;
